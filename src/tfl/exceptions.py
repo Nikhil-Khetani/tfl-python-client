@@ -18,7 +18,7 @@ class TFLAPIException(Exception):
         self.response = response
         self.request = getattr(response, 'request', None)
 
-    def __str__(self):  # pragma: no cover
+    def __str__(self):
         return f'APIError(code={self.code}): {self.message}'
 
 
