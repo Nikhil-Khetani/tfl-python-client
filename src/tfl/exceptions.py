@@ -10,7 +10,7 @@ class TFLAPIException(Exception):
         try:
             json_res = json.loads(text)
         except ValueError:
-            self.message = 'Invalid JSON error message from Binance: {}'.format(response.text)
+            self.message = 'Invalid JSON error message from TFL: {}'.format(response.text)
         else:
             self.code = json_res['code']
             self.message = json_res['msg']
@@ -30,4 +30,4 @@ class TFLRequestException(Exception):
         self.message = message
 
     def __str__(self):
-        return 'BinanceRequestException: %s' % self.message
+        return 'TFLRequestException: %s' % self.message
