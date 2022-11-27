@@ -7,7 +7,7 @@
     "python.autoComplete.extraPaths": [
         "./src"
     ],
-    "python.analysis.typeCheckingMode": "off",
+    "python.analysis.typeCheckingMode": "basic",
     "python.analysis.extraPaths": [
         "./src"
     ],

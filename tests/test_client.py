@@ -7,4 +7,4 @@ def test_client_not_empty():
     '''
     test_client_not_empty
     '''
-    assert Client().test=='test'
+    assert Client() is not None
