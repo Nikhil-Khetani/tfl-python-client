@@ -1,5 +1,5 @@
+'''exceptions.py'''
 import json
-
 
 class TFLAPIException(Exception):
     '''
@@ -10,7 +10,7 @@ class TFLAPIException(Exception):
         try:
             json_res = json.loads(text)
         except ValueError:
-            self.message = 'Invalid JSON error message from TFL: {}'.format(response.text)
+            self.message = f'Invalid JSON error message from TFL: {response.text}'
         else:
             self.code = json_res['code']
             self.message = json_res['msg']
@@ -19,7 +19,7 @@ class TFLAPIException(Exception):
         self.request = getattr(response, 'request', None)
 
     def __str__(self):  # pragma: no cover
-        return 'APIError(code=%s): %s' % (self.code, self.message)
+        return f'APIError(code={self.code}): {self.message}'
 
 
 class TFLRequestException(Exception):
@@ -30,4 +30,4 @@ class TFLRequestException(Exception):
         self.message = message
 
     def __str__(self):
-        return 'TFLRequestException: %s' % self.message
+        return f'TFLRequestException: {self.message}'
