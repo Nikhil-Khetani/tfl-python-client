@@ -2,9 +2,9 @@
 import json
 
 class TFLAPIException(Exception):
-    '''
-    TFLAPIException
-    '''
+    """
+    Exception for unparseable responses for TFL API.
+    """
     def __init__(self, response, status_code, text):
         self.code = 0
         try:
@@ -21,11 +21,10 @@ class TFLAPIException(Exception):
     def __str__(self):
         return f'APIError(code={self.code}): {self.message}'
 
-
 class TFLRequestException(Exception):
-    '''
-    TFLRequestException
-    '''
+    """
+    Exception for when TFL API request is unsuccessful.
+    """
     def __init__(self, message):
         self.message = message
 

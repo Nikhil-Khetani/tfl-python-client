@@ -8,13 +8,16 @@ import requests
 from tfl.exceptions import TFLAPIException, TFLRequestException
 
 class BaseClient():
-    '''
+    """
     BaseClient object to store headers and initiate API calls from
 
     Parameters
     ----------
-    api_url : str (default: 'https://api.tfl.gov.uk/')
+    api_url : str, default: 'https://api.tfl.gov.uk/'
         The root url from which all endpoints can be accessed.
+
+    Returns
+    -------
 
     See Also
     --------
@@ -22,11 +25,17 @@ class BaseClient():
 
     Notes
     -----
-    
 
     Examples
     --------
-    '''
+
+    Raises
+    ------
+    TFLAPIException
+        _description_
+    TFLRequestException
+        _description_
+    """
     def __init__(self, api_url = 'https://api.tfl.gov.uk/') -> None:
         self.test = 'test'
         self.api_url = api_url
@@ -34,6 +43,14 @@ class BaseClient():
         self.request_timeout = 1000
 
     def _get_headers(self) -> Dict:
+        """
+        Generated headers for http request
+
+        Returns
+        -------
+        Dict
+            Headers for http request
+        """
         headers = {
             'Accept': 'application/json',
         }
@@ -91,12 +108,12 @@ class BaseClient():
         return self._request_api('delete', path, signed, **kwargs)
 
 class Client(BaseClient):
-    '''
-    Client object to store headers and initiate API calls from
+    """
+    Client object to store headers and initiate API calls from.
 
     Parameters
     ----------
-    api_url : str (default: 'https://api.tfl.gov.uk/')
+    api_url : str, default: 'https://api.tfl.gov.uk/'
         The root url from which all endpoints can be accessed.
 
     See Also
@@ -108,24 +125,37 @@ class Client(BaseClient):
 
     Examples
     --------
-    '''
+    """
     def __init__(self, api_url='https://api.tfl.gov.uk/') -> None:
         super().__init__(api_url = api_url)
 
     def get_valid_modes(self):
-        '''
-        Get valid modes
-        Gets a list of valid modes
-        '''
+        """
+        _summary_
+
+        Returns
+        -------
+        _type_
+            _description_
+        """
         return self._get('Line/Meta/Modes', False)
 
     def get_routes(self, mode):
-        '''
-        Get routes
+        """
         Gets all lines and their valid routes for given modes,
         including the name and id of the originating and terminating
         stops for each route
-        '''
+
+        Parameters
+        ----------
+        mode : str
+            _description_
+
+        Returns
+        -------
+        Dict
+            _description_
+        """
         return self._get(f'Line/Mode/{mode}/Route')
 
     def get_line_ids(self, service_type = 'Regular') -> Dict:
@@ -134,7 +164,7 @@ class Client(BaseClient):
 
         Parameters
         ----------
-        service_type : str (default: 'Regular')
+        service_type : str, default: 'Regular'
             Specify serviceTypes, either 'Regular' or 'Night'
 
         Returns
@@ -158,3 +188,4 @@ if __name__=="__main__":
     for i in data:
         for key, value in i.items():
             print(f'{key}:{value}')
+
