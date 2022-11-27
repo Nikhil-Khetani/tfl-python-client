@@ -3,5 +3,5 @@ pythonpath = [
   "src/"
 ]
 addopts = [
-    "--import-mode=importlib",
+  "--import-mode=importlib",
 ]

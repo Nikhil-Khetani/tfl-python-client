@@ -11,4 +11,5 @@
     "python.analysis.extraPaths": [
         "./src"
     ],
+    "python.linting.enabled": true,
 }
