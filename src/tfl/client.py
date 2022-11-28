@@ -188,4 +188,3 @@ if __name__=="__main__":
     for i in data:
         for key, value in i.items():
             print(f'{key}:{value}')
-
