@@ -62,7 +62,7 @@ class BaseClient():
         session.headers.update(headers)
         return session
 
-    def _request(self, method, uri: str, signed: bool, **kwargs):
+    def _request(self, method, uri: str, signed: bool, **kwargs):    
         print(kwargs)
         # set default requests timeout
         kwargs['timeout'] = self.request_timeout

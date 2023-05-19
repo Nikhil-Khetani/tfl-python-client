@@ -12,7 +12,8 @@
         "./src"
     ],
     "python.linting.enabled": true,
-    "autoDocstring.docstringFormat": "numpy",
+    "autoDocstring.customTemplatePath": "C:/Users/Nikhil/Documents/Python_Codes/RESOURCES/numpy_docstring.mustache",
     "autoDocstring.guessTypes": true,
-    "autoDocstring.startOnNewLine":true
+    "autoDocstring.startOnNewLine":true,
+    "autoDocstring.includeExtendedSummary":true,
 }
