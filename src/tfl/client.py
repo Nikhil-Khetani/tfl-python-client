@@ -662,11 +662,11 @@ class LineEndpoint():
         to_stop_point_id : str | None, optional
             The destination stations's Naptan code, by default None
         """
-        if to_stop_point_id == None:
+        if to_stop_point_id is None:
             return self.client.get(f"Line/{line_id}/Timetable/{from_stop_point_id}")
         else:
             return self.client.get(f"Line/{line_id}/Timetable/{from_stop_point_id}/to/{to_stop_point_id}")
-            
+
     def get_disruptions_for_line_ids(self, ids: List[str]):
         """
         Get disruptions for the given line ids
