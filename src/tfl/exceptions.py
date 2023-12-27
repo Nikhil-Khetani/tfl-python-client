@@ -1,7 +1,7 @@
 '''exceptions.py'''
 import json
 
-class TFLAPIException(Exception):    
+class TFLAPIException(Exception):
     """
     Exception for unparseable responses for TFL API.
     """
