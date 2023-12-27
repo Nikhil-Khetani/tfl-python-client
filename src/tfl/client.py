@@ -2,11 +2,8 @@
 Client.py
 '''
 from typing import Dict, List
-import requests
 import json
-#import pandas as pd
-import logging
-import sys
+import requests
 from tfl.exceptions import TFLAPIException, TFLRequestException
 
 class BaseClient():
@@ -16,7 +13,7 @@ class BaseClient():
     Parameters
     ----------
     api_url : str, default: 'https://api.tfl.gov.uk/'
-        The root url from which all endpoints can be accessed.
+        The root url for the TFL Unified API from which all endpoints can be accessed.
 
     Returns
     -------
@@ -132,60 +129,6 @@ class Client(BaseClient):
         super().__init__(api_url = api_url)
         self.line = LineEndpoint(self)
 
-    # def get_valid_modes(self):
-    #     """
-    #     _summary_
-
-    #     Returns
-    #     -------
-    #     _type_
-    #         _description_
-    #     """
-    #     return self._get('Line/Meta/Modes', False)
-
-    # def get_routes(self, mode):
-    #     """
-    #     Gets all lines and their valid routes for given modes,
-    #     including the name and id of the originating and terminating
-    #     stops for each route
-
-    #     Parameters
-    #     ----------
-    #     mode : str
-    #         _description_
-
-    #     Returns
-    #     -------
-    #     Dict
-    #         _description_
-    #     """
-    #     return self._get(f'Line/Mode/{mode}/Route')
-
-    # def get_line_ids(self, service_type = 'Regular') -> Dict:
-    #     """
-    #     Get line ids.
-
-    #     Parameters
-    #     ----------
-    #     service_type : str, default: 'Regular'
-    #         Specify serviceTypes, either 'Regular' or 'Night'
-
-    #     Returns
-    #     -------
-    #     Dict
-    #         Output of API request.
-
-    #     Notes
-    #     -----
-
-    #     See Also
-    #     --------
-    #     """
-    #     if service_type not in ['Regular','Night']:
-    #         raise Exception('Invalid serviceTypes argument')
-    #     return self._get('Line/Route', False, serviceTypes = service_type)
-
-
 class LineEndpoint():
     """
     _summary_
@@ -199,7 +142,7 @@ class LineEndpoint():
     """
     def __init__(self, client) -> None:
         self.client = client
-    
+
     def get_valid_modes(self):
         """
         Gets a list of valid modes
@@ -224,7 +167,7 @@ class LineEndpoint():
         ]
         """
         return self.client.get('Line/Meta/Modes')
-    
+
     def get_severity_codes(self):
         """
         Gets a list of valid severity codes
@@ -465,7 +408,7 @@ class LineEndpoint():
         }
         """
         return self.client.get(f'Line/{line_id}/Route/Sequence/{direction}', params=json.dumps({'serviceTypes':','.join(service_types), 'excludeCrowding':exclude_crowding}))
-    
+
     def get_line_status_between_dates(self, ids: List[str], detail: bool, start_date: str, end_date: str):
         """
         Gets the line status for given line ids during the provided dates e.g Minor Delays
@@ -710,10 +653,3 @@ class LineEndpoint():
         if destination_station_id is not None:
             params["destinationStationId"] = destination_station_id
         return self.client.get(f"Line/{','.join(ids)}/Arrivals/{stop_point_id}", params=params)
-
-if __name__=="__main__":
-    # data = Client().get_routes('tube')
-    data = Client().line.get_valid_routes_for_all_lines()
-    for i in data:
-        for key, value in i.items():
-            print(f'{key}:{value}')
