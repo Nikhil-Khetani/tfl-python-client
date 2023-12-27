@@ -12,8 +12,8 @@ class TFLAPIException(Exception):
         except ValueError:
             self.message = f'Invalid JSON error message from TFL: {response.text}'
         else:
-            self.code = json_res['code']
-            self.message = json_res['msg']
+            self.code = json_res['httpStatusCode']
+            self.message = json_res['message']
         self.status_code = status_code
         self.response = response
         self.request = getattr(response, 'request', None)
